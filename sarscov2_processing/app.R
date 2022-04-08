@@ -35,10 +35,16 @@ ui <- fluidPage(
 # Define server logic 
 server <- function(input, output) {
     
-    base_data <- reactive({
+    base_data_processing <- reactive({
         base_meta <- input$base_file
         
     })
+    
+    fasta_file_processing <- reactive({
+        base_fasta <- input$fasta_file
+        
+        
+    }) 
     
 }
 
