@@ -9,40 +9,37 @@
 
 library(shiny)
 
-# Define UI for application that draws a histogram
+# Define UI 
 ui <- fluidPage(
 
     # Application title
     titlePanel("Processing SARS-COV-2 Sequencing Data"),
 
-    # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+            h6("Option to Download Compiled Data")
         ),
 
-        # Show a plot of the generated distribution
+        # main panel contents = loading initial files
+        # action buttons for various other processing
         mainPanel(
-           plotOutput("distPlot")
+            fileInput("base_file", h4("Base File Input:")), 
+            fileInput("fasta_file", h4("FASTA File Input:")),
+            actionButton("pangolin_action", "Pangolin"), 
+            actionButton("nextclade_action", "Nextclade"), 
+            actionButton("nextclade_action", "GISAID")
         )
     )
 )
 
-# Define server logic required to draw a histogram
+# Define server logic 
 server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    
+    base_data <- reactive({
+        base_meta <- input$base_file
+        
     })
+    
 }
 
 # Run the application 
